@@ -1,5 +1,3 @@
-from tkinter import N
-from xml.dom import NotFoundErr
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
