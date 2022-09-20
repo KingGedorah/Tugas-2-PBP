@@ -1,0 +1,112 @@
+[
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 1,
+        "fields": {
+            "status": "Sudah Ditonton",
+            "title": "Ready Player One",
+            "rating": "8",
+            "release_date": "28/03/2018",
+            "review": "yes"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 2,
+        "fields": {
+            "status": "Sudah Ditonton",
+            "title": "Everything Everywhere All At Once",
+            "rating": "8",
+            "release_date": "22/06/2022",
+            "review": "yes"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 3,
+        "fields": {
+            "status": "Sudah Ditonton",
+            "title": "Your Name",
+            "rating": "9",
+            "release_date": "07/12/2016",
+            "review": "yes"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 4,
+        "fields": {
+            "status": "Sudah Ditonton",
+            "title": "Avatar",
+            "rating": "9",
+            "release_date": "17/12/2009",
+            "review": "yes"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 5,
+        "fields": {
+            "status": "Sudah Ditonton",
+            "title": "Maquia: When The Promised Flower Blooms",
+            "rating": "8",
+            "release_date": "24/08/2018",
+            "review": "yes"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 6,
+        "fields": {
+            "status": "Sudah Ditonton",
+            "title": "Interstellar",
+            "rating": "8",
+            "release_date": "06/11/2014",
+            "review": "yes"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 7,
+        "fields": {
+            "status": "Belum Ditonton",
+            "title": "Venom",
+            "rating": "7",
+            "release_date": "03/10/2018",
+            "review": "yes"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 8,
+        "fields": {
+            "status": "Belum Ditonton",
+            "title": "Top Gun Maverick",
+            "rating": "8",
+            "release_date": "27/05/2022",
+            "review": "yes"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 9,
+        "fields": {
+            "status": "Belum Ditonton",
+            "title": "Morbius",
+            "rating": "5",
+            "release_date": "30/03/2022",
+            "review": "yes"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 10,
+        "fields": {
+            "status": "Belum Ditonton",
+            "title": "Venom: Let There Be Carnage",
+            "rating": "6",
+            "release_date": "17/11/2021",
+            "review": "yes"
+        }
+    }
+]
