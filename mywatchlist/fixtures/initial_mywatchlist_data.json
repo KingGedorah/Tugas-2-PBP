@@ -3,110 +3,110 @@
         "model": "mywatchlist.watchlistitem",
         "pk": 1,
         "fields": {
-            "status": "Sudah Ditonton",
+            "status": "Watched",
             "title": "Ready Player One",
             "rating": "8",
             "release_date": "28/03/2018",
-            "review": "yes"
+            "review": "Best movie about diving into world of game"
         }
     },
     {
         "model": "mywatchlist.watchlistitem",
         "pk": 2,
         "fields": {
-            "status": "Sudah Ditonton",
+            "status": "Watched",
             "title": "Everything Everywhere All At Once",
             "rating": "8",
             "release_date": "22/06/2022",
-            "review": "yes"
+            "review": "Movies about multiverse and is one of best movie i have watched"
         }
     },
     {
         "model": "mywatchlist.watchlistitem",
         "pk": 3,
         "fields": {
-            "status": "Sudah Ditonton",
+            "status": "Watched",
             "title": "Your Name",
             "rating": "9",
             "release_date": "07/12/2016",
-            "review": "yes"
+            "review": "Makoto shinkai's masterpiece"
         }
     },
     {
         "model": "mywatchlist.watchlistitem",
         "pk": 4,
         "fields": {
-            "status": "Sudah Ditonton",
+            "status": "Watched",
             "title": "Avatar",
             "rating": "9",
             "release_date": "17/12/2009",
-            "review": "yes"
+            "review": "One of the best movies"
         }
     },
     {
         "model": "mywatchlist.watchlistitem",
         "pk": 5,
         "fields": {
-            "status": "Sudah Ditonton",
+            "status": "Watched",
             "title": "Maquia: When The Promised Flower Blooms",
             "rating": "8",
             "release_date": "24/08/2018",
-            "review": "yes"
+            "review": "Highly recommend to watch"
         }
     },
     {
         "model": "mywatchlist.watchlistitem",
         "pk": 6,
         "fields": {
-            "status": "Sudah Ditonton",
+            "status": "Watched",
             "title": "Interstellar",
             "rating": "8",
             "release_date": "06/11/2014",
-            "review": "yes"
+            "review": "One of the best movies about sci-fi"
         }
     },
     {
         "model": "mywatchlist.watchlistitem",
         "pk": 7,
         "fields": {
-            "status": "Belum Ditonton",
+            "status": "Not Watched",
             "title": "Venom",
             "rating": "7",
             "release_date": "03/10/2018",
-            "review": "yes"
+            "review": "Spiderman dark mode"
         }
     },
     {
         "model": "mywatchlist.watchlistitem",
         "pk": 8,
         "fields": {
-            "status": "Belum Ditonton",
+            "status": "Not Watched",
             "title": "Top Gun Maverick",
             "rating": "8",
             "release_date": "27/05/2022",
-            "review": "yes"
+            "review": "Movies about naval aviator that lead TOP GUN"
         }
     },
     {
         "model": "mywatchlist.watchlistitem",
         "pk": 9,
         "fields": {
-            "status": "Belum Ditonton",
+            "status": "Not Watched",
             "title": "Morbius",
             "rating": "5",
             "release_date": "30/03/2022",
-            "review": "yes"
+            "review": "Not recommend to watch"
         }
     },
     {
         "model": "mywatchlist.watchlistitem",
         "pk": 10,
         "fields": {
-            "status": "Belum Ditonton",
+            "status": "Not Watched",
             "title": "Venom: Let There Be Carnage",
             "rating": "6",
             "release_date": "17/11/2021",
-            "review": "yes"
+            "review": "Sequel from venom"
         }
     }
 ]
