@@ -30,4 +30,10 @@
     {% endfor %}
   </table>
 
+  {% if check_status %}
+    <h1>Selamat, kamu sudah banyak menonton!</h1>
+  {% else %}
+    <h1>Wah, kamu masih sedikit menonton!</h1>
+  {% endif %}
+
  {% endblock content %}
