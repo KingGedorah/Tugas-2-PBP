@@ -1,6 +1,6 @@
 # **Tugas 2 PBP : Pengenalan Aplikasi Django dan Models View Template (MVT) pada Django**
 
- > ###### Link menuju Heroku : https://web-tugas2pbp-palinggg.herokuapp.com/katalog/
+ > ###### Link menuju Heroku : [Heroku-Tugas 2 PBP](https://web-tugas2pbp-palinggg.herokuapp.com/katalog/)
 
 ## **Bagan _request client_ ke Web Berbasis Django**
 
