@@ -63,12 +63,10 @@
             </ul>   
           {% endif %}
 
-          <div class="col text-center">
-              <button class="btn btn-outline-primary btn-lg px-5" type="submit" value="Submit">Submit</button>
+          <div class="col-sm-4-mb3 text-center">
+            <button class="btn btn-outline-primary px-5" type="submit" value="Submit">Submit</button>
+            <a href="{% url 'todolist:show_todolist' %}" class="btn btn-secondary" role="button">Cancel</a>
           </div>
-
         </form>
-
-
 
 {% endblock content %}
