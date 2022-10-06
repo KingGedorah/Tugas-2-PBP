@@ -1,35 +1,74 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Tugas 4 PBP / PBD</h1>
-<h1>Selamat datang, {{username}}</h1>
 
-<table>
-    <tr>
-    <th>Created Date</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Status</th>
-    </tr>
-    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
-    {% for todo in task_list %}
-        <tr>
-            <th>{{todo.date}}</th>
-            <th>{{todo.title}}</th>
-            <th>{{todo.description}}</th>
-            {% if todo.is_finished %}
-                <td>Done</td>
-            {% else %}
-                <td>Not Done Yet!</td>
-            {% endif %}
-            <th>
-                <a href="{% url 'todolist:update_task' todo.pk %}">Edit Status</a>
-                <a href="{% url 'todolist:delete_task' todo.pk %}">Delete</a>
-            </th>
-        </tr>
-    {% endfor %}
-</table>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">TODOLIST</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'todolist:create_task' %}">Create Task</a>
+                    </li>
+                </ul>
+            <a href = "{% url 'todolist:logout_user' %}">
+                <span class = "glyphicon glyphicon-log-out">Logout</span>
+            </a>
+            </div>
+    </div>
+</nav>
 
-<button><a href="{% url 'todolist:create_task' %}">Create New Task</a></button>
-<button><a href="{% url 'todolist:logout_user' %}">Logout</a></button>
+    <section class="vh-50">
+        <div class="container py-5 h-20">
+            <div class="row d-flex justify-content-center align-items-center h-20">
+                <div class="card" id="list1" style="border-radius: .5rem; width: 50rem; background-color: #e7eef0;">
+                <div class="card-body py-4 px-4 px-md-5">
+                    <p class="h1 text-center mt-3 mb-4 pb-3 text-primary">
+                        <a>{{username}}'s Todo</a>
+                    </p>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            {% for todo in task_list %}
+                <div class="col-sm-4 mb-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ todo.title }}</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Created Date : {{ todo.date }}</li>
+                            <li class="list-group-item">Title : {{ todo.title }}</li>
+                            <li class="list-group-item">Description : {{ todo.description }}</li>
+                            {% if todo.is_finished %}
+                                <li class="list-group-item">Status : Done</li>
+                            {% else %}
+                                <li class="list-group-item">Status : Not Done Yet!</li>
+                            {% endif %}
+                            <li class="list-group-item"><a href="{% url 'todolist:update_task' todo.pk %}">Edit Status</a></li>
+                            <li class="list-group-item"><a href="{% url 'todolist:delete_task' todo.pk %}">Delete</a></li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <a href="{% url 'todolist:create_task' %}" class="btn btn-primary" role="button">Create New Task</a>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

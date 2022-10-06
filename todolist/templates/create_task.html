@@ -6,29 +6,69 @@
 
 {% block content %}  
 
-<div class = "Create Task">
-    
-    <h1>Create Task</h1>  
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'todolist:show_todolist' %}">TODOLIST</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'todolist:show_todolist' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Create Task</a>
+          </li>
+        </ul>
+        <a href = "{% url 'todolist:logout_user' %}">
+            <span class = "glyphicon glyphicon-log-out">Logout
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+    <section class="vh-20">
+        <div class="container py-5 h-20">
+            <div class="row d-flex justify-content-center align-items-center h-10">
+                <div class="card" id="list1" style="border-radius: .5rem; width: 50rem; background-color: #e7eef0;">
+                <div class="card-body py-1 px-1 px-md-1">
+                    <p class="h1 text-center mt-1 mb1 pb-1 text-primary">
+                        <a>Create New Task Down Below</a>
+                    </p>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
         <form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <tr>  
-                    <td></td>
-                    <td><input type="submit" name="submit" value="Save"/></td>  
-                </tr>  
-            </table>  
+          {% csrf_token %}  
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" name="title" placeholder="Title" required class="form-control border rounded-lg border-gray-400 w-full">
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" name="description" placeholder="Description" required class="form-control border rounded-lg border-gray-400 w-full">
+          </div>
+
+          {% if messages %}  
+            <ul class="form-group">   
+              {% for message in messages %}  
+                <li>{{ message }}</li>  
+              {% endfor %}  
+            </ul>   
+          {% endif %}
+
+          <div class="col text-center">
+              <button class="btn submit_bt" type="submit" value="Submit">Submit</button>
+          </div>
+
         </form>
 
-    {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
-                {% endfor %}  
-        </ul>   
-    {% endif %}
 
-</div>  
 
 {% endblock content %}
