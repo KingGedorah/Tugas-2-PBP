@@ -82,3 +82,83 @@ path('todolist/', include('todolist.urls')),
 ...
 ```
 10. Lakukan perintah `add`, `commit`, dan `push` untuk melakukan deploy ke `Heroku`
+
+#
+
+# Tugas 5: Web Design Using HTML, CSS, and CSS Framework
+
+Link Aplikasi Heroku : [Tugas5PBP-todolist](https://web-tugas2pbp-palinggg.herokuapp.com/todolist/)
+
+## Perbedaan Inline, Internal, dan External CSS
+- Inline CSS adalah kode CSS yang ditulis langsung pada atribut elemen HTML. Contoh penggunaannya seperti :
+    ```html
+    <h1 style=" color: red">
+        heading
+    </h2>
+    ```
+- Internal CSS adalah kode CSS yang ditulis dalam `tag<style>` dan kode HTML yang ditulis di bagian header file HTML. Contoh penggunaannya seperti :
+    ```html
+    <h1>
+        Heading
+    </h1>
+    <style>
+        h1 {
+            color : red
+        }
+    </style>
+    ```
+- External CSS adalah kode CSS yang ditulis terpisah dari kode HTML. External CSS di tulis di sebuah file dengan eksistensi `.css`. File CSS yang digunakan sebagai _styling_ biasanya diletakkan setelah bagian `<head>` di halaman. Contoh penggunaannya :
+    ```html
+    <link href="external.css" rel="styleshee">
+
+    <h1>
+        Heading
+    </h1>
+    ```
+
+**Inline CSS**
+
+**Kelebihan**
+- Proses request HTTP yang kecil membuat proses loading website jadi lebih cepat. 
+
+**Kekurangan**
+- Tidak efisien karena hanya bisa diterapkan pada satu elemen saja
+
+**Internal CSS**
+
+**Kelebihan**
+- Class dan ID bisa digunakan oleh internal stylesheet
+- Tidak perlu mengupload file tambahan karena HTML dan CSS berada pada file yang sama
+
+**Kekurangan**
+- Performa web menjad lambat, karena CSS yang berbeda-beda dapat mengakibatkan loading ulang setiap berganti halaman website
+
+**External CSS**
+
+**Kelebihan**
+- Ukuran halaman jadi lebih kecil dan Struktur HTML menjadi lebih rapi
+- Loading website menjadi lebih cepat.
+
+**Kekurangan**
+- Ketika file CSS gagal dipanggil, tampilan webiste akan terlihat berantakan
+
+## Tag pada HTML
+- `<title>` : Untuk membuat suatu halaman
+- `<h1>` to `<h6>` : Untuk membuat heading
+- `<p>` : Untuk membuat paragraf
+- `<div>` : Untuk membuat bagian dalam dokumen
+- `<button>` : Untuk membuat button
+- `<a>` : Untuk membuat hyperlink
+
+## Tipe - tipe CSS Selector 
+- Selektor Tag, memilih elemen berdasarkan tag.
+- Selektor Class, memilih elemen berdasarkan nama class yang diberikan.
+- Selektor ID,  memilih elemen berdasarkan ID. ID mirip dengan class tetapi ID bersifat unik.
+- Selektor Atribut, memilih elemen berdasarkan atribut.
+- Selektor Universal,  menyeleksi semua elemen pada jangkaua (scope) tertentu
+- Selektor Pseudo, memilih elemen semu seperti state pada elemen, elemen before dan after, elemen ganjil, dan sebagainya.
+
+## Implementasi
+1. Menginclude bootstrap pada `base.html`
+2. Menerapkan styling pada halama project todolist
+3. Membuat navbar dan menerapkan card
