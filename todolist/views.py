@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from todolist.forms import NewTask
 from todolist.models import Task
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 @login_required(login_url='/todolist/login/')
@@ -57,6 +58,7 @@ def logout_user(request):
     return response
 
 @login_required(login_url='/todolist/login/')
+@csrf_exempt
 def create_task(request):
     form = NewTask()
     context = {'form': form}
@@ -73,12 +75,14 @@ def create_task(request):
     return render(request, 'create_task.html', context)
 
 @login_required(login_url='/todolist/login/')
+@csrf_exempt
 def delete_task(request, id):
     task = Task.objects.get(user=request.user, pk=id)
     task.delete()
     return redirect("todolist:show_todolist")
 
 @login_required(login_url='/todolist/login/')
+@csrf_exempt
 def update_task(request, id):
     task = Task.objects.get(user = request.user, pk = id)
     task.is_finished = not task.is_finished
@@ -91,15 +95,12 @@ def show_todolist_json(request):
     return HttpResponse(serializers.serialize('json', task), content_type="application/json")
 
 @login_required(login_url='/todolist/login/')
-def add_task(req):
-    form = NewTask()
-    context = {'form': form}
+@csrf_exempt
+def add_task(request):
     if request.method == 'POST':
-        form = NewTask(request.POST)
-        if form.is_valid():
-            form_listener = form.save(commit=False)
-            form_listener.user = request.user
-            form_listener.save()
-            return HttpResponseRedirect(reverse('todolist:show_todolist'))
-        else:
-            messages.info(request, 'Error when Entering Data!')
+        user = request.user
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        Task.objects.create(user=user,title=title,description=description)
+    
+    return HttpResponse("Success")

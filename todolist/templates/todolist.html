@@ -1,6 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    body {
+        background-color: rgba(244, 233, 233, 0.211);
+    }
+
+    .card {
+        background-color: #e7eef0;
+    }
+
+    .list-group-item {
+        background-color: #e7eef0;
+    }
+
+</style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -41,72 +55,157 @@
     </section>
 
     <div class="container" id="task-container">
-        <div class="row">
-                {% for todo in task_list %}
-                    <div class="col-sm-4 mb-3">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ todo.title }}</h5>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Created Date : {{ todo.date }}</li>
-                                <li class="list-group-item">Title : {{ todo.title }}</li>
-                                <li class="list-group-item">Description : {{ todo.description }}</li>
-                                {% if todo.is_finished %}
-                                    <li class="list-group-item">Status : Done</li>
-                                {% else %}
-                                    <li class="list-group-item">Status : Not Done Yet!</li>
-                                {% endif %}
-                                <li class="list-group-item"><a href="{% url 'todolist:update_task' todo.pk %}">Edit Status</a></li>
-                                <li class="list-group-item"><a href="{% url 'todolist:delete_task' todo.pk %}">Delete</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                {% endfor %}
+        <div class="row py-5 h-20">
         </div>
     </div>
 
     <div class="container">
         <div class="row">
+            <!-- Button Create Task 
             <div class="col text-center">
                 <a href="{% url 'todolist:create_task' %}" class="btn btn-primary" role="button">Create New Task</a>
+            </div>
+            -->
+            
+            <div class="col text-center">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTask">
+                Add New Task Using Modal
+                </button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="modalTask" tabindex="-1" aria-labelledby="modalTaskLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalTaskLabel">Create New Task</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input id="title-input" type="text" name="title" placeholder="Title" required class="form-control border rounded-lg border-gray-400 w-full">
+                        </div>
+                
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input id="description-input" type="text" name="description" placeholder="Description" required class="form-control border rounded-lg border-gray-400 w-full">
+                        </div>
+                
+                        {% if messages %}  
+                            <ul class="form-group">   
+                              {% for message in messages %}  
+                                <li>{{ message }}</li>  
+                              {% endfor %}  
+                            </ul>   
+                        {% endif %}
+                        <div class="container py-5 ph-20">
+                            <div class="row d-flex justify-content-center align-items-center h-20">
+                                <button type="close-button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                            <div class="row d-flex justify-content-center align-items-center h-20">
+                                <button id="save-Task" class="btn btn-primary" type="submit" value="Submit" onclick="AddTask()">Save changes</button>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                    <div class="modal-footer">
+                    
+                    </div>
+                </div>
+                </div>
             </div>
         </div>
     </div>
 
 <script>
     function getTodos() {
-        $.get("/todolist/json/", (data) => {
+        $.get("json/", (data) => {
             $('#task-container').empty();
-            for (var i = 0; i <data.length; i++) {
-                $('#task-container').append(
-                    `<div class="container">
-                        <div class="row">
-                            <div class="col-sm-4 mb-3">
-                                <div class="card" style="width: 18rem;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${todo.title}</h5>
-                                    </div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Created Date : ${todo.date }</li>
-                                        <li class="list-group-item">Title : ${todo.title}</li>
-                                        <li class="list-group-item">Description : ${ todo.description}</li>
-                                        {% if todo.is_finished %}
-                                            <li class="list-group-item">Status : Done</li>
-                                        {% else %}
-                                            <li class="list-group-item">Status : Not Done Yet!</li>
-                                        {% endif %}
-                                        <li class="list-group-item"><a href='/todolist/update_task/${todo.pk}'>Edit Status</a></li>
-                                        <li class="list-group-item"><a href='todolist/delete_task/${todo.pk}'>Delete</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+            for (i = 0; i < data.length; i++) {
+                $('#card-container').append(`
+                    <div class="flex flex-wrap flex-col p-4 md:p-2 lg:p-8 overflow-x-auto bg-white rounded-lg border border-gray-200">
+                        <div class="flex-wrap">
+                            <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900">${data[i].fields.title}</p>
+                            <p>Created on ${data[i].fields.date}.</p>
+                            
+                            <p class="mb-3" id="card-${data[i].pk}-status"></p>
+                            <p class="mb-3">${data[i].fields.description}</p>
                         </div>
+                        <div class="flex flex-wrap mt-auto">
+                            <a>
+                                <button type="button" 
+                                class="bg-gray-200 hover:bg-gray-300 text-black rounded-lg text-sm px-5 py-2 mr-1 my-1" id="update-button-${data[i].pk}">
+                                Change status
+                                </button>
+                            </a>
+                            <a>
+                                <button type="button" 
+                                class="text-white ml-2 bg-red-700 hover:bg-red-800 rounded-lg text-sm px-5 py-2 my-1" id="delete-button-${data[i].pk}">
+                                Delete
+                                </button>
+                            </a>
                         </div>
-                    `
-                )
+                    </div>
+                `);
+                if (data[i].fields.is_finished) {
+                    $(`#card-${data[i].pk}-status`).addClass("text-green-700");
+                    $(`#card-${data[i].pk}-status`).text('Done')
+                } else {
+                    $(`#card-${data[i].pk}-status`).addClass("text-red-600");
+                    $(`#card-${data[i].pk}-status`).text('Not Done Yet')
+                }
+                
+                $(`#update-button-${data[i].pk}`).attr('onclick', `updateStatus(${data[i].pk})`)
+                $(`#delete-button-${data[i].pk}`).attr('onclick', `deleteTask(${data[i].pk})`)
             }
-        })
+        });
     }
+
+    function AddTask() {
+        var title = $('#title-input').val();
+        var description = $('#description-input').val();
+
+        if (title != "" && description != "") {
+            $.post({url : 'add/', type : 'post', data :{
+                title,
+                description
+                },
+            success: getTodos,
+            });
+            closeModal();
+        }
+    }
+
+    function closeModal() {
+        $('#title-input').val("");
+        $('#description-input').val("");
+    }
+
+    function updateStatus(id) {
+        $.post({
+            url:`update/${id}/`,
+            type: 'post',
+            data: {},
+            success: getTodos,
+        });
+    }
+
+    function deleteTask(id) {
+        $.post({
+            url:`delete/${id}/`,
+            type: 'post',
+            data: {},
+            success: getTodos,
+        });
+    }
+
+    $(document).ready(function(){
+        getTodos();
+    });
+
+
 </script>
 {% endblock content %}
