@@ -1,5 +1,6 @@
 import datetime
-from django.shortcuts import render
+from urllib import request
+from django.shortcuts import HttpResponse, render
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
@@ -9,6 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from todolist.forms import NewTask
 from todolist.models import Task
+from django.core import serializers
 
 # Create your views here.
 @login_required(login_url='/todolist/login/')
@@ -82,3 +84,22 @@ def update_task(request, id):
     task.is_finished = not task.is_finished
     task.save()
     return redirect('todolist:show_todolist')
+
+@login_required(login_url='/todolist/login/')
+def show_todolist_json(request):
+    task = Task.objects.filter(user = request.user)
+    return HttpResponse(serializers.serialize('json', task), content_type="application/json")
+
+@login_required(login_url='/todolist/login/')
+def add_task(req):
+    form = NewTask()
+    context = {'form': form}
+    if request.method == 'POST':
+        form = NewTask(request.POST)
+        if form.is_valid():
+            form_listener = form.save(commit=False)
+            form_listener.user = request.user
+            form_listener.save()
+            return HttpResponseRedirect(reverse('todolist:show_todolist'))
+        else:
+            messages.info(request, 'Error when Entering Data!')
